@@ -9,13 +9,53 @@
   <script type="text/babel">
     // 🐨 Make a function called `message` which returns the JSX we want to share
 
+    function message(props){
+        return <div className="message" {...props}></div>
+    }
+
     // 🐨 use that function in place of the divs below with:
     // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
-    const element = (
+    // const element = (
+    //   <div className="container">
+    //     <div className="message">Hello World</div>
+    //     <div className="message">Goodbye World</div>
+    //   </div>
+    // )
+
+
+    // const element = (
+    //   <div className="container">
+    //     {message({ children: 'Hello World!'})}
+    //     {message({ children: 'Goodbye World.', id: 'goodbye'})}
+    //   </div>
+    // )
+
+    //Extra Credit #1
+    //O método React.createElement() pode receber no seu primeiro argumento, em vez do
+    //tipo do elemento a ser criado, uma função que retorna HTML renderizável
+    let element = (
       <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
+        {React.createElement(message, {children: 'Hello World'})}
+        {message({ children: 'Goodbye World.', id: 'goodbye'})}
       </div>
+    )
+
+    function Message({subject, greeting}) {
+        return (
+            <div className="message">
+                {greeting}, {subject}
+            </div>
+        )
+    }
+
+    //Renderizar = processar um código JS para gerar elementos HTML
+
+    //Usando o componente personalizado representadopela função Message
+    element = (
+        <div className="container">
+            <Message subject="mamãe" greeting="Alô"/>
+            <Message greeting="Bem-vindo" subject="humano"/>
+        </div>
     )
 
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
